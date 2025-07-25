@@ -9,11 +9,15 @@
   <style>
     body {
       margin: 0;
-      background: #222;
+      background: url('https://www.transparenttextures.com/patterns/book-cover.png'), #282c34;
+      background-size: cover;
+      background-repeat: repeat;
+      font-family: sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      min-height: 100vh;
     }
 
     #flipbook {
@@ -120,24 +124,20 @@
 
 <script>
   $(document).ready(function(){
-    $('#flipbook').turn({
-      width: $('#flipbook').width(),
-      height: $('#flipbook').height(),
+    $("#flipbook").turn({
+      width: 800,
+      height: 600,
       autoCenter: true,
-      elevation: 50,
-      gradients: true
+      gradients: true,
+      elevation: 50
     });
 
-    $('#prev-btn').click(function(){
-      $('#flipbook').turn('previous');
+    $("#prev-btn").click(function(){
+      $("#flipbook").turn("previous");
     });
 
-    $('#next-btn').click(function(){
-      $('#flipbook').turn('next');
-    });
-
-    $(window).on('resize', function(){
-      $('#flipbook').turn('size', $('#flipbook').width(), $('#flipbook').height());
+    $("#next-btn").click(function(){
+      $("#flipbook").turn("next");
     });
   });
 </script>
