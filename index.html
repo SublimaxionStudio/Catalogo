@@ -2,15 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Flipbook funcional</title>
+  <title>Flipbook funcional responsive</title>
 
   <style>
     body {
       margin: 0;
-      /* 👇 Personaliza el fondo aquí: color o imagen */
       background: #222 url('fondo.jpg') no-repeat center center fixed;
       background-size: cover;
-
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -53,7 +51,7 @@
     #prev-btn { left: 10px; }
     #next-btn { right: 10px; }
 
-    /* Botón de descarga */
+    /* Botón para descargar catálogo */
     .download-btn {
       position: fixed;
       bottom: 20px;
@@ -70,6 +68,36 @@
 
     .download-btn:hover {
       background: white;
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+      #flipbook {
+        width: 90vw;
+        height: 70vh;
+      }
+
+      .page {
+        width: 50vw;
+        height: 70vh;
+      }
+
+      .nav-btn {
+        padding: 8px 14px;
+        font-size: 16px;
+      }
+
+      .download-btn {
+        font-size: 18px;
+        padding: 14px 20px;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80vw;
+        text-align: center;
+        box-sizing: border-box;
+        position: fixed;
+      }
     }
   </style>
 </head>
@@ -97,8 +125,8 @@
 <script>
   $(document).ready(function(){
     $("#flipbook").turn({
-      width: 800,
-      height: 600,
+      width: $("#flipbook").width(),
+      height: $("#flipbook").height(),
       autoCenter: true,
       gradients: true,
       elevation: 50
@@ -110,6 +138,11 @@
 
     $("#next-btn").click(function(){
       $("#flipbook").turn("next");
+    });
+
+    // Ajustar tamaño del flipbook al cambiar tamaño de ventana (opcional)
+    $(window).on('resize', function(){
+      $("#flipbook").turn("size", $("#flipbook").width(), $("#flipbook").height());
     });
   });
 </script>
