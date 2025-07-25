@@ -2,157 +2,146 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flipbook funcional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flipbook Personalizado</title>
 
+  <!-- ESTILOS PERSONALIZABLES -->
   <style>
     body {
       margin: 0;
-      background: #222;
+      background: url('https://www.transparenttextures.com/patterns/book-cover.png'), #282c34;
+      background-size: cover;
+      background-repeat: repeat;
+      font-family: sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    #flipbook-container {
-      position: relative;
-      max-width: 100%;
     }
 
     #flipbook {
-      width: 100%;
+      width: 90vw;
       max-width: 800px;
-      height: auto;
-      aspect-ratio: 4/3;
+      height: 60vh;
     }
 
     .page {
-      background: white;
+      width: 100%;
+      height: 100%;
+      /* 👇 Elimina fondo blanco */
+      background: transparent;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .page img {
       width: 100%;
       height: 100%;
-      display: block;
       object-fit: contain;
+      display: block;
     }
 
-    /* Botones de navegación */
+    /* BOTONES DE NAVEGACIÓN */
+    #nav-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
     .nav-btn {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.7);
+      background: #ffffffcc; /* 👈 Personaliza color de botones */
       border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 20px;
-      z-index: 10;
+      padding: 10px 25px;
       border-radius: 5px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
     }
 
-    #prev-btn { left: 10px; }
-    #next-btn { right: 10px; }
+    .nav-btn:hover {
+      background: #fff;
+      box-shadow: 0 0 10px #00000044;
+    }
 
-    /* Botón de descarga */
-    #download-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #4CAF50;
+    /* BOTÓN DE DESCARGA */
+    #controls {
+      margin-top: 10px;
+    }
+
+    #controls a button {
+      background: #4caf50;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
       cursor: pointer;
-      font-size: 16px;
-      z-index: 10;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
-    #download-btn:hover {
-      background: #45a049;
-    }
-
-    @media (max-width: 768px) {
-      .nav-btn {
-        padding: 8px 15px;
-        font-size: 16px;
+    @media (max-width: 600px) {
+      #flipbook {
+        height: 70vh;
       }
-      
-      #download-btn {
-        padding: 8px 15px;
-        font-size: 14px;
+
+      .nav-btn {
+        padding: 8px 18px;
+        font-size: 18px;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- Contenedor del flipbook -->
-<div id="flipbook-container">
-  <div id="flipbook">
-    <div class="page"><img src="pages/pagina1.jpg" alt="Página 1"></div>
-    <div class="page"><img src="pages/pagina2.jpg" alt="Página 2"></div>
-    <div class="page"><img src="pages/pagina3.jpg" alt="Página 3"></div>
-    <div class="page"><img src="pages/pagina4.jpg" alt="Página 4"></div>
-  </div>
+<!-- FLIPBOOK -->
+<div id="flipbook">
+  <div class="page"><img src="pages/pagina1.jpg" alt="Página 1"></div>
+  <div class="page"><img src="pages/pagina2.jpg" alt="Página 2"></div>
+  <div class="page"><img src="pages/pagina3.jpg" alt="Página 3"></div>
+  <div class="page"><img src="pages/pagina4.jpg" alt="Página 4"></div>
 </div>
 
-<!-- Botones de navegación -->
-<button class="nav-btn" id="prev-btn">&#8592;</button>
-<button class="nav-btn" id="next-btn">&#8594;</button>
+<!-- BOTONES DE FLECHAS -->
+<div id="nav-buttons">
+  <button class="nav-btn" id="prev-btn">&#8592; Anterior</button>
+  <button class="nav-btn" id="next-btn">Siguiente &#8594;</button>
+</div>
 
-<!-- Botón de descarga -->
-<a href="catalogo.pdf" download="catalogo.pdf" id="download-btn">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-  </svg>
-  Descargar PDF
-</a>
+<!-- BOTÓN DE DESCARGA -->
+<div id="controls">
+  <a href="catalogo.pdf" download>
+    <button>Descargar PDF</button>
+  </a>
+</div>
 
-<!-- Scripts -->
+<!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/turn.min.js"></script>
 
 <script>
-  // Configuración del flipbook
   $(document).ready(function(){
-    function initFlipbook() {
-      const containerWidth = $('#flipbook-container').width();
-      const calculatedWidth = Math.min(containerWidth, 800);
-      const calculatedHeight = calculatedWidth * 0.75; // Relación 4:3
-      
-      $("#flipbook").turn({
-        width: calculatedWidth,
-        height: calculatedHeight,
-        autoCenter: true,
-        gradients: true,
-        elevation: 30
-      });
-    }
-
-    // Inicializar y redimensionar
-    initFlipbook();
-    $(window).resize(function(){
-      $("#flipbook").turn("destroy");
-      initFlipbook();
+    $('#flipbook').turn({
+      width: $('#flipbook').width(),
+      height: $('#flipbook').height(),
+      autoCenter: true,
+      elevation: 50,
+      gradients: true
     });
 
-    // Navegación
-    $("#prev-btn").click(function(){
-      $("#flipbook").turn("previous");
+    $('#prev-btn').click(function(){
+      $('#flipbook').turn('previous');
     });
 
-    $("#next-btn").click(function(){
-      $("#flipbook").turn("next");
+    $('#next-btn').click(function(){
+      $('#flipbook').turn('next');
+    });
+
+    $(window).on('resize', function(){
+      $('#flipbook').turn('size', $('#flipbook').width(), $('#flipbook').height());
     });
   });
 </script>
