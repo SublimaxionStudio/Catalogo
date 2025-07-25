@@ -111,4 +111,20 @@
       gradients: true,
       when: {
         turning: function(event, page, view) {
-          // Puedes añadir efectos aquí s
+          // Puedes añadir efectos aquí si deseas
+        }
+      }
+    });
+
+    $('#prev-btn').click(function () {
+      $('#flipbook').turn('previous');
+    });
+
+    $('#next-btn').click(function () {
+      $('#flipbook').turn('next');
+    });
+  });
+</script>
+
+</body>
+</html>
