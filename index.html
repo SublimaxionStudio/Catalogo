@@ -2,25 +2,29 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Flipbook de imágenes</title>
+  <title>Flipbook de Imágenes</title>
+
+  <!-- Librerías -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/turn.js@4/turn.min.js"></script>
+
+  <!-- Estilos -->
   <style>
     body {
-      background: #f0f0f0;
+      background: #ccc;
       display: flex;
       justify-content: center;
-      padding: 40px;
+      padding: 50px;
     }
     #flipbook {
       width: 800px;
       height: 600px;
     }
-    #flipbook .page {
+    .page {
       width: 400px;
       height: 600px;
     }
-    #flipbook img {
+    .page img {
       width: 100%;
       height: 100%;
       display: block;
@@ -34,14 +38,18 @@
   <div class="page"><img src="pages/pagina2.jpg" alt="Página 2"></div>
   <div class="page"><img src="pages/pagina3.jpg" alt="Página 3"></div>
   <div class="page"><img src="pages/pagina4.jpg" alt="Página 4"></div>
-  <!-- Agrega más según tus imágenes -->
 </div>
 
 <script>
-  $("#flipbook").turn({
-    width: 800,
-    height: 600,
-    autoCenter: true
+  $(document).ready(function() {
+    $('#flipbook').turn({
+      width: 800,
+      height: 600,
+      autoCenter: true,
+      elevation: 50,
+      gradients: true,
+      duration: 600
+    });
   });
 </script>
 
