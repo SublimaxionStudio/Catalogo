@@ -7,8 +7,12 @@
   <style>
     body {
       margin: 0;
-      background: #222;
+      /* 👇 Personaliza el fondo aquí: color o imagen */
+      background: #222 url('fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -17,6 +21,7 @@
     #flipbook {
       width: 800px;
       height: 600px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
     .page {
@@ -32,7 +37,7 @@
       display: block;
     }
 
-    /* Botones */
+    /* Botones de navegación */
     .nav-btn {
       position: fixed;
       top: 50%;
@@ -47,6 +52,25 @@
 
     #prev-btn { left: 10px; }
     #next-btn { right: 10px; }
+
+    /* Botón de descarga */
+    .download-btn {
+      position: fixed;
+      bottom: 20px;
+      background: rgba(255,255,255,0.8);
+      border: none;
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #000;
+      z-index: 10;
+    }
+
+    .download-btn:hover {
+      background: white;
+    }
   </style>
 </head>
 <body>
@@ -62,6 +86,9 @@
 <!-- Botones de navegación -->
 <button class="nav-btn" id="prev-btn">&#8592;</button>
 <button class="nav-btn" id="next-btn">&#8594;</button>
+
+<!-- Botón para descargar el catálogo PDF -->
+<a href="catalogo.pdf" download class="download-btn">📥 Descargar catálogo</a>
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
