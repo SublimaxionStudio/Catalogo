@@ -2,34 +2,29 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flipbook Personalizado</title>
+  <title>Flipbook sin separación</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ESTILOS PERSONALIZABLES -->
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
-      background: #111; /* 👈 Cambia aquí el fondo del sitio (color o imagen) */
-      /* ejemplo con imagen: 
-      background: url('fondo.jpg') no-repeat center center;
-      background-size: cover;
-      */
+      padding: 0;
+      background: #1e1e1e; /* Cambia este valor para personalizar el fondo */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     #flipbook {
       width: 90vw;
       max-width: 800px;
       height: 60vh;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3); /* opcional, solo estético */
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
 
     .page {
@@ -37,9 +32,6 @@
       height: 100%;
       background: transparent;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin: 0 !important;
       padding: 0 !important;
       border: none !important;
@@ -55,108 +47,68 @@
       border: none;
     }
 
-
-    /* BOTONES DE NAVEGACIÓN */
-    #nav-buttons {
+    .controls {
       margin-top: 20px;
       display: flex;
-      gap: 20px;
       justify-content: center;
-      align-items: center;
+      gap: 20px;
     }
 
-    .nav-btn {
-      background: #ffffffcc; /* 👈 Personaliza color de botones */
+    .nav-btn, .download-btn {
+      background: #ffffffcc;
       border: none;
-      padding: 10px 25px;
-      border-radius: 5px;
-      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s;
+      font-size: 18px;
+      transition: background 0.3s;
     }
 
-    .nav-btn:hover {
-      background: #fff;
-      box-shadow: 0 0 10px #00000044;
+    .nav-btn:hover, .download-btn:hover {
+      background: #ffffff;
     }
 
-    /* BOTÓN DE DESCARGA */
-    #controls {
-      margin-top: 10px;
-    }
-
-    #controls a button {
-      background: #4caf50;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       #flipbook {
         height: 70vh;
       }
 
-      .nav-btn {
-        padding: 8px 18px;
-        font-size: 18px;
+      .nav-btn, .download-btn {
+        font-size: 16px;
+        padding: 8px 16px;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- FLIPBOOK -->
+<!-- Contenedor del flipbook -->
 <div id="flipbook">
-  <div class="page"><img src="pages/pagina1.jpg" alt="Página 1"></div>
-  <div class="page"><img src="pages/pagina2.jpg" alt="Página 2"></div>
-  <div class="page"><img src="pages/pagina3.jpg" alt="Página 3"></div>
-  <div class="page"><img src="pages/pagina4.jpg" alt="Página 4"></div>
+  <div class="page"><img src="pages/pagina1.jpg" alt="1"></div>
+  <div class="page"><img src="pages/pagina2.jpg" alt="2"></div>
+  <div class="page"><img src="pages/pagina3.jpg" alt="3"></div>
+  <div class="page"><img src="pages/pagina4.jpg" alt="4"></div>
 </div>
 
-<!-- BOTONES DE FLECHAS -->
-<div id="nav-buttons">
-  <button class="nav-btn" id="prev-btn">&#8592; Anterior</button>
-  <button class="nav-btn" id="next-btn">Siguiente &#8594;</button>
+<!-- Controles -->
+<div class="controls">
+  <button class="nav-btn" id="prev-btn">⬅ Anterior</button>
+  <button class="nav-btn" id="next-btn">Siguiente ➡</button>
+  <a href="catalogo.pdf" download class="download-btn">📥 Descargar PDF</a>
 </div>
 
-<!-- BOTÓN DE DESCARGA -->
-<div id="controls">
-  <a href="catalogo.pdf" download>
-    <button>Descargar PDF</button>
-  </a>
-</div>
-
-<!-- SCRIPTS -->
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/turn.min.js"></script>
 
 <script>
-  $(document).ready(function(){
+  $(document).ready(function () {
     $('#flipbook').turn({
       width: $('#flipbook').width(),
       height: $('#flipbook').height(),
       autoCenter: true,
       elevation: 50,
-      gradients: true
-    });
-
-    $('#prev-btn').click(function(){
-      $('#flipbook').turn('previous');
-    });
-
-    $('#next-btn').click(function(){
-      $('#flipbook').turn('next');
-    });
-
-    $(window).on('resize', function(){
-      $('#flipbook').turn('size', $('#flipbook').width(), $('#flipbook').height());
-    });
-  });
-</script>
-
-</body>
-</html>
+      gradients: true,
+      when: {
+        turning: function(event, page, view) {
+          // Puedes añadir efectos aquí s
