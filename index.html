@@ -124,22 +124,36 @@
 
 <script>
   $(document).ready(function(){
-    $("#flipbook").turn({
-      width: 800,
-      height: 600,
+    $('#flipbook').turn({
+      width: $('#flipbook').width(),
+      height: $('#flipbook').height(),
       autoCenter: true,
-      gradients: true,
-      elevation: 50
+      elevation: 50,
+      gradients: true
     });
 
-    $("#prev-btn").click(function(){
-      $("#flipbook").turn("previous");
+    $('#prev-btn').click(function() {
+      $('#flipbook').turn('previous');
     });
 
-    $("#next-btn").click(function(){
-      $("#flipbook").turn("next");
+    $('#next-btn').click(function() {
+      $('#flipbook').turn('next');
+    });
+
+    // Ajustar tamaño al redimensionar ventana
+    $(window).on('resize', function() {
+      $('#flipbook').turn('size', $('#flipbook').width(), $('#flipbook').height());
     });
   });
+
+  // Cambiar fondo entre color e imagen
+  let fondoAlternativo = false;
+  function cambiarFondo() {
+    fondoAlternativo = !fondoAlternativo;
+    document.body.style.background = fondoAlternativo
+      ? "#1e1e1e"
+      : "url('https://www.transparenttextures.com/patterns/book-cover.png'), #282c34";
+  }
 </script>
 
 </body>
