@@ -84,7 +84,7 @@
       cursor: pointer;
     }
 
-    @media (max-width: 200px) {
+    @media (max-width: 600px) {
       #flipbook {
         height: 70vh;
       }
@@ -124,6 +124,18 @@
 <script src="js/turn.min.js"></script>
 
 <script>
+  function ajustarFlipbook() {
+    const ancho = window.innerWidth;
+    const alto = window.innerHeight;
+    const esMovil = ancho < 768;
+
+    const flipbook = $('#flipbook');
+    const nuevoAncho = esMovil ? ancho * 0.95 : 800;
+    const nuevoAlto = esMovil ? alto * 0.6 : 600;
+
+    flipbook.turn('size', nuevoAncho, nuevoAlto);
+  }
+
   $(document).ready(function(){
     $('#flipbook').turn({
       width: $('#flipbook').width(),
@@ -141,9 +153,8 @@
       $('#flipbook').turn('next');
     });
 
-    $(window).on('resize', function(){
-      $('#flipbook').turn('size', $('#flipbook').width(), $('#flipbook').height());
-    });
+    $(window).on('resize', ajustarFlipbook);
+    ajustarFlipbook();
   });
 </script>
 
